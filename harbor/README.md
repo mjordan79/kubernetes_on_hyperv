@@ -17,6 +17,22 @@ At the next reboot, Harbor probably will break. This happens because Harbor is l
 following the correct order for services. To fix this, link the Harbor software to the systemd utility.
 
    a. Copy the harbor.service file in /etc/systemd/system/harbor.service and edit the paths inside it.
+
+    [Unit]
+    Description=Harbor
+    After=docker.service systemd-networkd.service systemd-resolved.service
+    Requires=docker.service
+    Documentation=http://github.com/vmware/harbor
+ 
+    [Service]
+    Type=simple
+    Restart=on-failure
+    RestartSec=5
+    ExecStart=/usr/local/bin/docker-compose -f /opt/harbor/docker-compose.yml up
+    ExecStop=/usr/local/bin/docker-compose -f /opt/harbor/docker-compose.yml down
+    
+    [Install]
+    WantedBy=multi-user.target
    
    b. Go in the harbor directory and stop it through docker compose:
       
