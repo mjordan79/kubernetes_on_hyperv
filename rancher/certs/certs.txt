@@ -1,4 +1,4 @@
 Put your certs here:
 tls.crt
 tls.key
-cacerts.pem (eventually if you chose to use a CA)
+cacerts.pem (eventually if you choose to use a CA)

@@ -2,17 +2,33 @@ nodes:
   - address: 192.169.0.10
     user: root
     role: [controlplane, worker, etcd]
-  - address: 192.169.0.15
-    user: root
-    role: [controlplane, worker, etcd]
-  - address: 192.169.0.20
-    user: root
-    role: [controlplane, worker, etcd]
 services:
   etcd:
     snapshot: true
-    creation: 6h
-    retention: 24h
+    creation: 2h
+    retention: 7d
+
+ignore_docker_version: true
+enable_cri_dockerd: false
+kubernetes_version: v1.21.9-rancher1-1
+
+services:
+  kubelet:
+    # Base domain for the cluster
+    #cluster_domain: cluster.local
+    # IP address for the DNS service endpoint
+    #cluster_dns_server: 10.43.0.10
+    # Fail if swap is on
+    #fail_swap_on: false
+    # Configure pod-infra-container-image argument
+    #pod-infra-container-image: "k8s.gcr.io/pause:3.2"
+    # Generate a certificate signed by the kube-ca Certificate Authority
+    # for the kubelet to use as a server certificate
+    # Available as of v1.0.0
+    #generate_serving_certificate: true
+    extra_args:
+      # Set max pods to 250 instead of default 110
+      max-pods: 250
 
 # Required for external TLS termination with
 # ingress-nginx v0.22+
