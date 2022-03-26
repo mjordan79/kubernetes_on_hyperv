@@ -6,11 +6,11 @@ services:
   etcd:
     snapshot: true
     creation: 2h
-    retention: 7d
+    retention: 168h
 
 ignore_docker_version: true
 enable_cri_dockerd: false
-kubernetes_version: v1.21.9-rancher1-1
+kubernetes_version: v1.22.7-rancher1-1
 
 services:
   kubelet:
